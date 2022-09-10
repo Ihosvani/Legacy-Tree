@@ -16,12 +16,12 @@ def login(request):
     if request.method == 'POST':
         #user not found by email
         try:
-            user = User.objects.filter(email=request.data[0])
+            user = User.objects.filter(email=request.data['email'])
         except User.DoesNotExist:
             return Response(data='An user with that email does not exists in our database', status=status.HTTP_401_UNAUTHORIZED)
         
         user_serializer = User_Serializers(user)
-        hashed_password = make_password(request.data[1])
+        hashed_password = make_password(request.data['password'])
 
         #user found but password doesn't match
         if not check_password(hashed_password, user_serializer.data['password_hash']):
