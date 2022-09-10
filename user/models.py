@@ -2,6 +2,8 @@ from datetime import datetime
 from enum import Enum
 from django.db import models
 
+from user.password_validator import NumberValidator, UppercaseValidator, LowercaseValidator, SymbolValidator
+
 # Create your models here.
 
 class Role(Enum):
@@ -20,5 +22,5 @@ class User(models.Model):
     activated = models.BooleanField(default=False)
     role = models.CharField(max_length=5, choices=[(role, role.value) for role in Role], default=Role.user)
     date_of_birth = models.DateTimeField()
-    last_login = models.DateTimeField()
+    last_login = models.DateTimeField(blank=True)
     date_of_creation = models.DateTimeField(default=datetime.now())
