@@ -1,3 +1,2 @@
-BookStoreAPI/bookstore/__pycache__
-BookStoreAPI/books/migrations
-BookStoreAPI/books/__pycache__
+*/__pycache__
+*/migrations
