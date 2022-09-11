@@ -8,8 +8,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 </head>
 <main>
-    {% block navbar %}{% endblock navbar %}
+    {% include 'navigation_bar.html' %}
     {% block content %}{% endblock content %}
-    {% block footer %}{% endblock footer %}
+    {% include 'footer.html' %}
 </main>
 </html>

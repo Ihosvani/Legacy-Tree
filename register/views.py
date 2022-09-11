@@ -1,39 +1,23 @@
 from django.shortcuts import render
-from rest_framework.response import Response
-from rest_framework import status
-from user.serializer import User_Serializers
-from django.contrib.auth.hashers import make_password
+from user.forms import User_Form
 from user.password_validator import NumberValidator, UppercaseValidator, LowercaseValidator, SymbolValidator, MinimumLengthValidator
-
+from django.core.exceptions import ValidationError
+from django.shortcuts import redirect
 # Create your views here.
 
-def register(request):
-    if request.method == 'POST':
-
-        length_validator = MinimumLengthValidator()
-
-        try:
-
-            length_validator.validate(request.data['password'])
-            NumberValidator.validate(request.data['password'])
-            UppercaseValidator.validate(request.data['password'])
-            LowercaseValidator.validate(request.data['password'])
-            SymbolValidator.validate(request.data['password'])
-
-        except ValidationError:
-
-            Response(status=status.HTTP_400_BAD_REQUEST, data=ValidationError.get_help_text())
-
-        request.data['password_hash'] = make_password(request.data['password'])
-        del request.data['password']
-
-        user_serializer = User_Serializers(data=request.data)
-        if not user_serializer.is_valid():
-            
-            return Response(status=status.HTTP_400_BAD_REQUEST, data=user_serializer.error_messages)
-
-        user_serializer.save()
-        return Response(status=status.HTTP_201_CREATED)
-
 def register_view(request):
-    pass
+    user_form = User_Form(request.POST or None)
+    next_page = 'registration.html'
+    context = {}
+    context['user_form'] = user_form
+
+    if not user_form.is_valid():
+        print('form is not valid')
+        context['user_form_errors'] = user_form.errors
+        
+    else:
+        print('form is valid')
+        user_form.save()
+        return redirect('/login/')
+        
+    return render(request, next_page, context=context)

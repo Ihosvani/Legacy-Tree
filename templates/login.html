@@ -1,5 +1,17 @@
 {% extends 'index.html' %}
 {% block content %}
-    <!--Here will go the login parts-->
-    <p>login works</p>
+<div class="box">
+    <form method='POST'>
+        {% csrf_token %}
+        {{login_form.as_p}}
+        {% if messages %}
+            {% for messages in messages %}
+            <p class='is-danger'>{{messages}}</p>
+            <br>
+            {% endfor %}
+        {% endif %}
+        <br>
+        <button class='button is-primary' type='submit'>Submit</button>
+    </form>
+</div>
 {% endblock content %}

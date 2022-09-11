@@ -1,9 +1,6 @@
-from datetime import datetime
 from enum import Enum
 from django.db import models
-
-from user.password_validator import NumberValidator, UppercaseValidator, LowercaseValidator, SymbolValidator
-
+from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 class Role(Enum):
@@ -11,16 +8,10 @@ class Role(Enum):
     guest = 'guest'
     user = 'user'
 
-class User(models.Model):
+class User(AbstractUser):
     
-    id = models.AutoField(primary_key=True)
-    username = models.CharField(max_length=255, unique=True)
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    email = models.CharField(max_length=100)
-    password_hash = models.CharField(max_length=255)
-    activated = models.BooleanField(default=False)
-    role = models.CharField(max_length=5, choices=[(role, role.value) for role in Role], default=Role.user)
-    date_of_birth = models.DateTimeField()
-    last_login = models.DateTimeField(blank=True)
-    date_of_creation = models.DateTimeField(default=datetime.now())
+    username = models.CharField(max_length=20, unique=True)
+    role = models.CharField(max_length=100, choices=[(role, role.value) for role in Role], default=Role.user)
+    email = models.EmailField(max_length=100, unique=True)
+    date_of_birth = models.DateField()
+    REQUIRED_FIELDS = []

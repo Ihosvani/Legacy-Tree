@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+{% block content %}
+<div class='column is-4 is-offset-4'>
+    <form method='POST'>
+        {% for field in user_form %}
+            <div> 
+                <strong class='has-text-black'>{{field.label}}</strong>
+            </div>
+            {{field}}
+            {% if field.errors %}
+                <div> 
+                    <strong class='has-text-danger'>{{field.errors}}</strong>
+                </div>
+            {% endif %}
+            <div>
+                <br>
+            </div>
+        {% endfor %}
+        {% csrf_token %}
+        <div>
+            <br>
+            <button class='button is-primary' type='submit'>Submit</button> 
+        </div>
+    </form>
+</div>
+{% endblock content %}

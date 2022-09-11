@@ -42,11 +42,12 @@ INSTALLED_APPS = [
     'corsheaders',
     'user',
     'login',
-    'register'
+    'register',
+    'authentication'
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
-
+AUTH_USER_MODEL = 'user.User'
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -56,7 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 ]   
-
+AUTHENTICATION_BACKENDS = ('authentication.auth.auth',)
 ROOT_URLCONF = 'LegacyTree.urls'
 
 TEMPLATES = [
