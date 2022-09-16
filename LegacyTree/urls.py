@@ -21,5 +21,5 @@ from register.views import register_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', login_view),
-    path('register/', register_view),
+    path('registration/', register_view),
 ]
