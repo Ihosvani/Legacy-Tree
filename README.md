@@ -10,12 +10,14 @@ Have python ^3.00 installed then run this commands:
     2. clone the repository on the folder that you prefer: git clone git@github.com:Ihosvani/Legacy-Tree.git
     3. Setting up the Database:
       1. Install pgAdmin: Acces this link https://www.pgadmin.org/download/ and download the app that is for your OS.
-      2. In pgAdmin open the servers by clicking the dropdown arrow(on the left side of the app) and then right click 
+      2. Install postgrsSQL ^14.00: Acces this link https://www.postgresql.org/download/, choose your OS, download 
+      and install, no password necessary and the port leave it deafult 5432
+      3. In pgAdmin open the servers by clicking the dropdown arrow(on the left side of the app) and then right click 
       on login/group roles, and then create login/group role. In the field name put "admin", then acces the definition 
       tab and put "1234" as the password and for last acces the "priviliges" tab and make sure all of the fields are check.
-      3. Then going back on the server dropdown menu right click Databases, then create Database. On the name 
+      4. Then going back on the server dropdown menu right click Databases, then create Database. On the name 
       put "LegacyTreeDB" and the owner "admin".
-      4. Goin back to the terminal run this command: pip install psycopg2.
+      5. Goin back to the terminal run this command: pip install psycopg2.
     4. In the terminal and being at the root of the project(LegacyTree, where the manage.py file is) run this series of commands:
       1. python manage.py makemigations
       2. python manage.py migrate
